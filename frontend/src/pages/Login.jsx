@@ -1,41 +1,226 @@
 import { useState } from "react";
 
+
 function Login() {
 
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
+    const [mensagem, setMensagem] = useState("");
+
+
+    async function fazerLogin(e) {
+
+        e.preventDefault();
+        console.log("CLIQUEI NO LOGINNNN");
+
+        try {
+
+            const resposta = await fetch(
+                "http://localhost:3000/login",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        email,
+                        senha
+                    })
+                }
+            );
+
+
+            const dados = await resposta.json();
+
+            console.log("RESPOSTA DO SERVIDOR:", dados);
+
+            if (dados.sucesso) {
+
+                setMensagem("Login realizado com sucesso!");
+
+                localStorage.setItem(
+                    "usuario",
+                    JSON.stringify(dados.usuario)
+                );
+
+
+                console.log(
+                    "Usuário:",
+                    dados.usuario
+                );
+
+
+
+            } else {
+
+                setMensagem(
+                    "Email ou senha inválidos"
+                );
+
+            }
+
+
+        } catch (erro) {
+
+            setMensagem(
+                "Erro ao conectar com servidor"
+            );
+
+        }
+
+    }
+
+
 
     return (
-        <div>
 
-            <h1>Login</h1>
+        <div style={styles.container}>
 
-            <form>
+
+            <form
+                onSubmit={fazerLogin}
+                style={styles.card}
+            >
+
+                <h1>
+                    Sistema Rabisco
+                </h1>
+
+
+                <p>
+                    Controle de estoque
+                </p>
+
 
                 <input
+
                     type="email"
-                    placeholder="E-mail"
+
+                    placeholder="Email"
+
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+
+                    onChange={
+                        (e) => setEmail(e.target.value)
+                    }
+
+                    style={styles.input}
+
                 />
 
-                <br /><br />
 
                 <input
+
                     type="password"
+
                     placeholder="Senha"
+
                     value={senha}
-                    onChange={(e) => setSenha(e.target.value)}
+
+                    onChange={
+                        (e) => setSenha(e.target.value)
+                    }
+
+                    style={styles.input}
+
                 />
 
-                <br /><br />
 
-                <button>Entrar</button>
+                <button
+                    type="submit"
+                    style={styles.button}
+                >
+
+                    Entrar
+
+                </button>
+
+
+                {
+                    mensagem &&
+                    <p>
+                        {mensagem}
+                    </p>
+                }
+
 
             </form>
 
+
         </div>
+
     );
+
 }
+
+
+
+const styles = {
+
+
+    container: {
+
+        height: "100vh",
+
+        display: "flex",
+
+        justifyContent: "center",
+
+        alignItems: "center",
+
+        background: "#f2f2f2"
+
+    },
+
+
+    card: {
+
+        background: "white",
+
+        padding: "40px",
+
+        borderRadius: "12px",
+
+        width: "300px",
+
+        boxShadow: "0 4px 15px #ccc",
+
+        display: "flex",
+
+        flexDirection: "column",
+
+        gap: "15px"
+
+    },
+
+
+    input: {
+
+        padding: "12px",
+
+        fontSize: "16px"
+
+    },
+
+
+    button: {
+
+        padding: "12px",
+
+        background: "#2563eb",
+
+        color: "white",
+
+        border: "none",
+
+        cursor: "pointer"
+
+    }
+
+
+};
+
 
 export default Login;
