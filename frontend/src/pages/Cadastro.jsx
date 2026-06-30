@@ -3,7 +3,7 @@ import UserRegister from './UserRegister';
 import ProductRegister from './ProductRegister';
 import SupplierRegister from './SupplierRegister';
 import logoRabisco from '../assets/images/logo.png';
-import './Cadastro.css'; // Importação do CSS global
+import './Cadastro.css'; 
 
 export default function Cadastro() {
   const [activeTab, setActiveTab] = useState('RF1');
@@ -13,7 +13,7 @@ export default function Cadastro() {
       <header className="app-navbar">
         <div className="brand-area">
           <img 
-            src={logoRabisco} // Corrigido: usando a variável
+            src={logoRabisco} 
             alt="Logo Sistema Rabisco" 
             className="app-logo"
           />
@@ -30,7 +30,7 @@ export default function Cadastro() {
             className={activeTab === 'RF2' ? 'tab-btn tab-btn-active' : 'tab-btn'} 
             onClick={() => setActiveTab('RF2')}
           >
-            Cadastro de produtos {/* Texto corrigido */}
+            Cadastro de produtos 
           </button>
           <button 
             className={activeTab === 'RF3' ? 'tab-btn tab-btn-active' : 'tab-btn'} 

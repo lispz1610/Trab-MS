@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import './ChangePassword.css';
 
 function ChangePassword() {
 
@@ -7,7 +7,6 @@ function ChangePassword() {
     const [novaSenha, setNovaSenha] = useState("");
     const [confirmarSenha, setConfirmarSenha] = useState("");
     const [mensagem, setMensagem] = useState("");
-
 
     async function trocarSenha(e) {
 
@@ -23,11 +22,9 @@ function ChangePassword() {
             return;
         }
 
-
         const usuario = JSON.parse(
             localStorage.getItem("usuario")
         );
-
 
         const resposta = await fetch(
             "http://localhost:3000/trocar-senha",
@@ -52,7 +49,6 @@ function ChangePassword() {
             }
         );
 
-
         const dados = await resposta.json();
 
 
@@ -61,7 +57,6 @@ function ChangePassword() {
             setMensagem(
                 "Senha alterada com sucesso!"
             );
-
 
             setSenhaAntiga("");
             setNovaSenha("");
@@ -77,80 +72,72 @@ function ChangePassword() {
 
     }
 
-
-
     return (
 
-        <div>
+        <div className="pagina-container">
 
+            <div className="change-passw-card">
 
-            <h1>
-                Trocar senha
-            </h1>
+                <h1>
+                    Trocar senha
+                </h1>
 
+                <form onSubmit={trocarSenha}>
 
-            <form onSubmit={trocarSenha}>
+                    <input
 
+                        type="password"
 
-                <input
+                        placeholder="Senha antiga"
 
-                    type="password"
+                        value={senhaAntiga}
 
-                    placeholder="Senha antiga"
+                        onChange={
+                            e => setSenhaAntiga(e.target.value)
+                        }
 
-                    value={senhaAntiga}
+                    />
 
-                    onChange={
-                        e => setSenhaAntiga(e.target.value)
-                    }
+                    <input
 
-                />
+                        type="password"
 
+                        placeholder="Nova senha"
 
-                <input
+                        value={novaSenha}
 
-                    type="password"
+                        onChange={
+                            e => setNovaSenha(e.target.value)
+                        }
 
-                    placeholder="Nova senha"
+                    />
 
-                    value={novaSenha}
+                    <input
 
-                    onChange={
-                        e => setNovaSenha(e.target.value)
-                    }
+                        type="password"
 
-                />
+                        placeholder="Confirmar nova senha"
 
+                        value={confirmarSenha}
 
-                <input
+                        onChange={
+                            e => setConfirmarSenha(e.target.value)
+                        }
 
-                    type="password"
+                    />
 
-                    placeholder="Confirmar nova senha"
-
-                    value={confirmarSenha}
-
-                    onChange={
-                        e => setConfirmarSenha(e.target.value)
-                    }
-
-                />
-
-
-                <button>
-                    Alterar senha
-                </button>
-
+                    <button>
+                        Alterar senha
+                    </button>
 
             </form>
 
-
-            <p>
+            <p className="mensagem">
                 {mensagem}
             </p>
 
-
         </div>
+     </div>
 
     );
 

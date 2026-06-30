@@ -2,7 +2,8 @@
 
 import GerenteHome from "./GerenteHome";
 import FuncionarioHome from "./FuncionarioHome";
-
+import Login from "./Login";
+import "./Home.css";
 
 function Home() {
 
@@ -15,9 +16,9 @@ function Home() {
     if (!usuario) {
 
         return (
-            <h1>
-                Usuário não logado
-            </h1>
+            <div class="container">
+                <h2>Usuário não logado</h2>
+            </div>
         )
 
     }

@@ -44,3 +44,25 @@ body {
     border-radius: 10px;
 
 }
+@font-face {
+  font-family: 'LettersforLearners'; 
+  src: url('./assets/fonts/LettersforLearners.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;     
+    height: 100vh;          
+    text-align: center;
+    font-family: 'Letters for learners', sans-serif;
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}

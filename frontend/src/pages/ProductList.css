@@ -1,0 +1,64 @@
+.header-fixo {
+  position: sticky;
+  top: 0;
+  background-color: #f9f9f9;
+  padding: 20px;
+  z-index: 100;
+  font-family: 'SistemaRabiscoFont';
+  border-bottom: 2px solid #ddd;
+}
+@font-face {
+  font-family: 'SistemaRabiscoFont'; 
+  src: url('./assets/fonts/KGPerfectPenmanship.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'segundafonte'; 
+  src: url('./assets/fonts/LettersforLearners.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+.search-input {
+  width: 100%;
+  max-width: 600px; 
+  padding: 15px;
+  font-size: 1.1rem;
+  border: 2px solid #144477;
+  border-radius: 8px;
+}
+
+.tabela-container {
+
+    overflow-x: auto;
+    max-height: 50vh;
+    overflow-y: auto;
+    margin:5px;
+}
+
+.tabela thead th {
+  position: sticky;
+  top: 0;
+  background-color: #144477;
+  color: white;
+  z-index: 1;
+}
+
+.tabela {
+    width: 100%;
+    table-layout: fixed; 
+    border-collapse: collapse;
+}
+
+.td, .th {
+    padding: 12px;
+    border: 1px solid #ddd;
+    word-wrap: break-word;
+    word-break: break-word;
+    font-family: 'segundafonte';
+}
+
+.tabela th:nth-child(1) { width: 20%; } 
+.tabela th:nth-child(2) { width: 25%; } 
+.tabela th:nth-child(3), .tabela th:nth-child(4), 
+.tabela th:nth-child(5), .tabela th:nth-child(6) { width: 13%; }
