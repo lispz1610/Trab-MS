@@ -11,7 +11,6 @@ function Login() {
     async function fazerLogin(e) {
 
         e.preventDefault();
-        console.log("CLIQUEI NO LOGINNNN");
 
         try {
 
@@ -38,8 +37,6 @@ function Login() {
 
             if (dados.sucesso) {
 
-                setMensagem("Login realizado com sucesso!");
-
                 localStorage.setItem(
                     "usuario",
                     JSON.stringify(dados.usuario)
@@ -52,16 +49,18 @@ function Login() {
                 );
 
 
+                if (dados.usuario.tipo === "gerente") {
 
-            } else {
+                    window.location.href = "/gerente";
 
-                setMensagem(
-                    "Email ou senha inválidos"
-                );
+                } else {
+
+                    window.location.href = "/funcionario";
+
+                }
+
 
             }
-
-
         } catch (erro) {
 
             setMensagem(
@@ -196,13 +195,13 @@ const styles = {
     },
 
     titulo: {
-        color: "#000000", 
+        color: "#000000",
         textAlign: "center",
         margin: "0 0 10px 0"
-        },
-    
+    },
+
     subtitulo: {
-        color: "#666666", 
+        color: "#666666",
         textAlign: "center",
         margin: "0 0 20px 0"
     },

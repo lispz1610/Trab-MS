@@ -4,7 +4,13 @@ function FuncionarioHome() {
         localStorage.getItem("usuario")
     );
 
+    function fazerLogout() {
 
+        localStorage.removeItem("usuario");
+
+        window.location.href = "/";
+
+    }
     return (
 
         <div>
@@ -31,9 +37,19 @@ function FuncionarioHome() {
                 Menu do funcionário
             </h3>
 
+            <button
+                onClick={() => {
+                    window.location.href = "/cadastro-produto";
+                }}>
+                Cadastrar produtos
+            </button>
 
-            <button>
-                Consultar estoque
+            <button
+                onClick={() => {
+                    window.location.href = "/estoque";
+                }}
+            >
+                Ver estoque
             </button>
 
 
@@ -46,6 +62,17 @@ function FuncionarioHome() {
                 Registrar saída
             </button>
 
+            <button
+                onClick={() => {
+                    window.location.href = "/trocar-senha";
+                }}
+            >
+                Trocar senha
+            </button>
+
+            <button onClick={fazerLogout}>
+                Sair
+            </button>
 
         </div>
 

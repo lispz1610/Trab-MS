@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 
-// ler json
+//ler json
 function lerArquivo(nome) {
 
     const dados = fs.readFileSync(
@@ -32,7 +32,7 @@ function salvarArquivo(nome, dados) {
 
 
 
-// teste
+//teste
 app.get("/", (req, res) => {
 
     res.json({
@@ -43,7 +43,7 @@ app.get("/", (req, res) => {
 
 
 
-// listar produtos
+//listar produtos
 app.get("/produtos", (req, res) => {
 
     const produtos = lerArquivo("produtos");
@@ -54,7 +54,7 @@ app.get("/produtos", (req, res) => {
 
 
 
-// cadastrar produto
+//cadastrar produto
 app.post("/produtos", (req, res) => {
 
 
@@ -63,13 +63,22 @@ app.post("/produtos", (req, res) => {
 
     const novoProduto = {
 
+
         id: Date.now(),
 
         nome: req.body.nome,
 
         descricao: req.body.descricao,
 
-        estoque: req.body.estoque
+        unidadeComprada: req.body.unidadeComprada,
+
+        estoqueMaximo: req.body.estoqueMaximo,
+
+        estoqueMinimo: req.body.estoqueMinimo,
+
+        pontoRessuprimento: req.body.pontoRessuprimento,
+
+        tempoGiro: req.body.tempoGiro
 
     };
 
@@ -115,6 +124,74 @@ app.post("/login", (req, res) => {
         });
 
     }
+
+});
+
+app.put("/trocar-senha", (req, res) => {
+
+
+    const usuarios = lerArquivo("usuarios");
+
+
+    const {
+        id,
+        senhaAntiga,
+        novaSenha
+    } = req.body;
+
+
+
+    const usuario = usuarios.find(
+        u => u.id === id
+    );
+
+
+
+    if (!usuario) {
+
+        return res.status(404).json({
+
+            sucesso: false,
+
+            mensagem: "Usuário não encontrado"
+
+        });
+
+    }
+
+
+
+    if (usuario.senha !== senhaAntiga) {
+
+        return res.status(401).json({
+
+            sucesso: false,
+
+            mensagem: "Senha antiga incorreta"
+
+        });
+
+    }
+
+
+
+    usuario.senha = novaSenha;
+
+
+
+    salvarArquivo(
+        "usuarios",
+        usuarios
+    );
+
+
+
+    res.json({
+
+        sucesso: true
+
+    });
+
 
 });
 

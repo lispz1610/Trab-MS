@@ -4,6 +4,13 @@ function GerenteHome() {
         localStorage.getItem("usuario")
     );
 
+    function fazerLogout() {
+
+        localStorage.removeItem("usuario");
+
+        window.location.href = "/";
+
+    }
 
     return (
 
@@ -31,17 +38,34 @@ function GerenteHome() {
             </h3>
 
 
-            <button>
+            <button
+                onClick={() => {
+                    window.location.href = "/cadastro-produto";
+                }}>
                 Cadastrar produtos
             </button>
 
 
-            <button>
+            <button
+                onClick={() => {
+                    window.location.href = "/cadastro-fornecedor";
+                }}>
                 Cadastrar fornecedores
             </button>
 
+            <button
+                onClick={() => {
+                    window.location.href = "/cadastro-funcionario";
+                }}>
+                Cadastrar funcionários
+            </button>
 
-            <button>
+
+            <button
+                onClick={() => {
+                    window.location.href = "/estoque";
+                }}
+            >
                 Ver estoque
             </button>
 
@@ -55,6 +79,17 @@ function GerenteHome() {
                 Usuários
             </button>
 
+            <button
+                onClick={() => {
+                    window.location.href = "/trocar-senha";
+                }}
+            >
+                Trocar senha
+            </button>
+
+            <button onClick={fazerLogout}>
+                Sair
+            </button>
 
         </div>
 

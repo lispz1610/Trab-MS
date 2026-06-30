@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "id": 1782790715342,
+    "nome": "Borracha amarela",
+    "descricao": "É uma borracha e é amarela",
+    "unidadeComprada": "Unidade",
+    "estoqueMaximo": "2",
+    "estoqueMinimo": "1",
+    "pontoRessuprimento": "1",
+    "tempoGiro": "300"
+  },
+  {
+    "id": 1782812227997,
+    "nome": "Caixa de lápis de cor",
+    "descricao": "Estou usando esse cadastro pra testar se o funcionário consegue cadastrar produtos",
+    "unidadeComprada": "Caixa",
+    "estoqueMaximo": "50",
+    "estoqueMinimo": "10",
+    "pontoRessuprimento": "10",
+    "tempoGiro": "60"
+  }
+]

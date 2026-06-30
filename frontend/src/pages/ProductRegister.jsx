@@ -28,53 +28,151 @@ export default function ProductRegister() {
     setProductData({ ...productData, foto: e.target.files[0] });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+
     e.preventDefault();
+
     setError('');
     setSuccess('');
 
-    if (!productData.nome || !productData.descricao || !productData.unidadeComprada || 
-        !productData.estoqueMaximo || !productData.estoqueMinimo || 
-        !productData.pontoRessuprimento || !productData.tempoGiro) {
-      setError('Erro: Todos os campos obrigatórios devem ser preenchidos.');
+
+    if (
+      !productData.nome ||
+      !productData.descricao ||
+      !productData.unidadeComprada ||
+      !productData.estoqueMaximo ||
+      !productData.estoqueMinimo ||
+      !productData.pontoRessuprimento ||
+      !productData.tempoGiro
+    ) {
+
+      setError(
+        'Erro: Todos os campos obrigatórios devem ser preenchidos.'
+      );
+
       return;
     }
 
-    if (produtosCadastradosSimulados.includes(productData.nome.trim())) {
-      setError('Erro: Este produto já está cadastrado no sistema.');
-      return;
-    }
 
     const max = Number(productData.estoqueMaximo);
     const min = Number(productData.estoqueMinimo);
     const ponto = Number(productData.pontoRessuprimento);
 
+
     if (min < 0 || max < 0 || ponto < 0) {
-      setError('Erro: Os valores de estoque e ponto de ressuprimento não podem ser negativos.');
+
+      setError(
+        'Erro: Os valores não podem ser negativos.'
+      );
+
       return;
     }
+
+
     if (min >= max) {
-      setError('Erro: O estoque mínimo não pode ser maior ou igual ao estoque máximo.');
+
+      setError(
+        'Erro: O estoque mínimo não pode ser maior ou igual ao máximo.'
+      );
+
       return;
     }
 
-    if (productData.foto && productData.foto.size > 5 * 1024 * 1024) {
-      setError('Erro: Falha no envio da imagem. O tamanho máximo permitido é 5MB.');
+
+    if (
+      productData.foto &&
+      productData.foto.size > 5 * 1024 * 1024
+    ) {
+
+      setError(
+        'Erro: A imagem deve ter no máximo 5MB.'
+      );
+
       return;
     }
 
-    setSuccess('Produto cadastrado com sucesso no sistema!');
-    setProductData({
-      nome: '',
-      foto: null,
-      descricao: '',
-      unidadeComprada: '',
-      estoqueMaximo: '',
-      estoqueMinimo: '',
-      pontoRessuprimento: '',
-      tempoGiro: ''
-    });
-    document.getElementById('file-input').value = '';
+
+
+    try {
+
+
+      const resposta = await fetch(
+        "http://localhost:3000/produtos",
+        {
+
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json"
+          },
+
+
+          body: JSON.stringify({
+
+            nome: productData.nome,
+
+            descricao: productData.descricao,
+
+            unidadeComprada: productData.unidadeComprada,
+
+            estoqueMaximo: productData.estoqueMaximo,
+
+            estoqueMinimo: productData.estoqueMinimo,
+
+            pontoRessuprimento: productData.pontoRessuprimento,
+
+            tempoGiro: productData.tempoGiro
+
+          })
+
+        }
+      );
+
+
+      const dados = await resposta.json();
+
+
+      console.log(
+        "Produto salvo:",
+        dados
+      );
+
+
+      setSuccess(
+        "Produto cadastrado com sucesso no sistema!"
+      );
+
+
+      setProductData({
+
+        nome: '',
+        foto: null,
+        descricao: '',
+        unidadeComprada: '',
+        estoqueMaximo: '',
+        estoqueMinimo: '',
+        pontoRessuprimento: '',
+        tempoGiro: ''
+
+      });
+
+
+      document.getElementById('file-input').value = '';
+
+
+    } catch (erro) {
+
+
+      console.log(erro);
+
+
+      setError(
+        "Erro ao conectar com servidor"
+      );
+
+
+    }
+
   };
 
   return (
