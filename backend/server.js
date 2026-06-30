@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 
-// função para ler JSON
+// ler json
 function lerArquivo(nome) {
 
     const dados = fs.readFileSync(
@@ -21,8 +21,6 @@ function lerArquivo(nome) {
 
 }
 
-
-// função para salvar JSON
 function salvarArquivo(nome, dados) {
 
     fs.writeFileSync(
@@ -90,7 +88,35 @@ app.post("/produtos", (req, res) => {
 
 })
 
+app.post("/login", (req, res) => {
 
+    const usuarios = lerArquivo("usuarios");
+
+    const { email, senha } = req.body;
+
+    const usuario = usuarios.find(
+        u => u.email === email &&
+            u.senha === senha
+    );
+
+
+    if (usuario) {
+
+        res.json({
+            sucesso: true,
+            usuario
+        });
+
+    } else {
+
+        res.status(401).json({
+            sucesso: false,
+            mensagem: "Email ou senha inválidos"
+        });
+
+    }
+
+});
 
 
 app.listen(3000, () => {
