@@ -84,7 +84,7 @@ function Login() {
                 style={styles.card}
             >
 
-                <h1>
+                <h1 style={styles.titulo}>
                     Sistema Rabisco
                 </h1>
 
@@ -195,7 +195,17 @@ const styles = {
 
     },
 
-
+    titulo: {
+        color: "#000000", 
+        textAlign: "center",
+        margin: "0 0 10px 0"
+        },
+    
+    subtitulo: {
+        color: "#666666", 
+        textAlign: "center",
+        margin: "0 0 20px 0"
+    },
     input: {
 
         padding: "12px",

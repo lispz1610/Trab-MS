@@ -1,7 +1,7 @@
-import GerenteHome from './pages/GerenteHome';
+import Login from './pages/Login';
 
 function App() {
-  return <GerenteHome />;
+  return <Login />;
 }
 
 export default App;
