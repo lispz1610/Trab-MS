@@ -1,14 +1,23 @@
 [
   {
     "id": 1,
+    "nome": "Maria Fernanda Gomes",
     "email": "admin@email.com",
-    "senha": "123",
+    "senha": "123123",
     "tipo": "gerente"
   },
   {
     "id": 2,
-    "email": "juju@gmail.com",
-    "senha": "123",
+    "nome": "Júlia Almeida Ferreira",
+    "email": "juju@email.com",
+    "senha": "456789",
+    "tipo": "funcionario"
+  },
+  {
+    "id": 1782828713634,
+    "nome": "Mariana Maria Marina",
+    "email": "mari@rabisco.com",
+    "senha": "123456",
     "tipo": "funcionario"
   }
 ]

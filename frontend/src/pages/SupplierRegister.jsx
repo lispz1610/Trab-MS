@@ -19,19 +19,19 @@ export default function SupplierRegister() {
     setSupplierData({ ...supplierData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setSuccess('');
-//flx alt 1
+    //flx alt 1
     if (!supplierData.cnpj || !supplierData.nome || !supplierData.telefone) {
       setError('Erro: Todos os campos obrigatórios (CNPJ, Nome e Telefone) devem ser preenchidos.');
       return;
     }
-//limpeza caracteres
+    //limpeza caracteres
     const cnpjLimpo = supplierData.cnpj.replace(/\D/g, '');
     const telefoneLimpo = supplierData.telefone.replace(/\D/g, '');
-//cnpj invalido
+    //cnpj invalido
     if (cnpjLimpo.length !== 14) {
       setError('Erro: CNPJ inválido. Certifique-se de que possui 14 dígitos.');
       return;
@@ -47,8 +47,66 @@ export default function SupplierRegister() {
       return;
     }
 
-    setSuccess('Fornecedor cadastrado com sucesso no sistema!');
-    setSupplierData({ cnpj: '', nome: '', telefone: '' });
+    try {
+
+      const resposta = await fetch(
+        "http://localhost:3000/fornecedores",
+        {
+
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json"
+          },
+
+          body: JSON.stringify({
+
+            cnpj: cnpjLimpo,
+
+            nome: supplierData.nome,
+
+            telefone: telefoneLimpo
+
+          })
+
+        }
+      );
+
+
+      const dados = await resposta.json();
+
+
+      console.log(
+        "Fornecedor salvo:",
+        dados
+      );
+
+
+      setSuccess(
+        'Fornecedor cadastrado com sucesso no sistema!'
+      );
+
+
+      setSupplierData({
+        cnpj: '',
+        nome: '',
+        telefone: ''
+      });
+
+
+    } catch (erro) {
+
+
+      console.log(erro);
+
+
+      setError(
+        "Erro ao conectar com servidor"
+      );
+
+
+    }
+
   };
 
   return (

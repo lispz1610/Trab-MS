@@ -6,6 +6,7 @@ import ProductRegister from "./pages/ProductRegister";
 import SupplierRegister from "./pages/SupplierRegister";
 import ChangePassword from "./pages/ChangePassword";
 import ProductList from "./pages/ProductList";
+import UserManagement from "./pages/UserManagement";
 
 function App() {
 
@@ -20,6 +21,8 @@ function App() {
     return <ChangePassword />;
   } if (caminho === "/estoque") {
     return <ProductList />;
+  } if (caminho === "/usuarios") {
+    return <UserManagement />;
   }
 
   const usuario = JSON.parse(

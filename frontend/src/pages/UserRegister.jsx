@@ -21,34 +21,117 @@ export default function UserRegister() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+
     e.preventDefault();
+
     setError('');
     setSuccess('');
 
-    //flx alt 3
-    if (!formData.nome || !formData.email || !formData.senha || !formData.perfil) {
-      setError('Erro: Todos os campos obrigatórios devem ser preenchidos.');
+
+    if (
+      !formData.nome ||
+      !formData.email ||
+      !formData.senha ||
+      !formData.perfil
+    ) {
+
+      setError(
+        'Erro: Todos os campos obrigatórios devem ser preenchidos.'
+      );
+
       return;
     }
 
-    // flx alt 1
-    if (emailsCadastradosSimulados.includes(formData.email.toLowerCase())) {
-      setError('Erro: O e-mail informado já está cadastrado no sistema.');
-      return;
-    }
-//flx alt 1
+
+
     if (formData.senha.length < 6) {
-      setError('Erro: A senha temporária deve conter no mínimo 6 caracteres.');
+
+      setError(
+        'Erro: A senha temporária deve conter no mínimo 6 caracteres.'
+      );
+
       return;
     }
 
-    setSuccess('Usuário cadastrado com sucesso!');
-    
-    //reset formulario
-    setFormData({ nome: '', email: '', senha: '', perfil: '' });
-  };
 
+
+
+    try {
+
+
+      const resposta = await fetch(
+        "http://localhost:3000/usuarios",
+        {
+
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json"
+          },
+
+
+          body: JSON.stringify({
+
+            nome: formData.nome,
+
+            email: formData.email,
+
+            senha: formData.senha,
+
+
+            // transforma o valor do rádio
+            tipo:
+              formData.perfil === "Gerente"
+                ? "gerente"
+                : "funcionario"
+
+
+          })
+
+        }
+      );
+
+
+      const dados = await resposta.json();
+
+
+      console.log(
+        "Usuário salvo:",
+        dados
+      );
+
+
+      setSuccess(
+        "Usuário cadastrado com sucesso!"
+      );
+
+
+      setFormData({
+
+        nome: '',
+        email: '',
+        senha: '',
+        perfil: ''
+
+      });
+
+
+
+    } catch (erro) {
+
+
+      console.log(erro);
+
+
+      setError(
+        "Erro ao conectar com servidor"
+      );
+
+
+    }
+
+  };
   return (
     <div className="register-container">
       <div className="register-card">

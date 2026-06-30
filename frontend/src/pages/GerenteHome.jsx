@@ -75,8 +75,12 @@ function GerenteHome() {
             </button>
 
 
-            <button>
-                Usuários
+            <button
+                onClick={() => {
+                    window.location.href = "/usuarios";
+                }}
+            >
+                Gerenciar usuários
             </button>
 
             <button

@@ -18,5 +18,15 @@
     "estoqueMinimo": "10",
     "pontoRessuprimento": "10",
     "tempoGiro": "60"
+  },
+  {
+    "id": 1782826988716,
+    "nome": "Caderno Monster High",
+    "descricao": "Caderno muito bonito, cheio de adesivos",
+    "unidadeComprada": "Unidade",
+    "estoqueMaximo": "20",
+    "estoqueMinimo": "0",
+    "pontoRessuprimento": "0",
+    "tempoGiro": "100"
   }
 ]
