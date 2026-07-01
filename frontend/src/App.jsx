@@ -21,6 +21,8 @@ function App() {
     </AppLayout>
   );
 
+  if (caminho === "/reposicao") return renderizar(Ressuprimento);
+  if (caminho === "/giro") return renderizar(GiroEstoque);
   if (caminho === "/cadastro-produto") return renderizar(ProductRegister,true);
   if (caminho === "/trocar-senha") {
     return (
