@@ -14,7 +14,7 @@ function FuncionarioHome() {
     return (
 
         <div className="home-container">
-            <h2>
+            <h2 className="home-welcome">
                 Bem-vindo, {usuario.nome || "funcionário"} 
             </h2>
 

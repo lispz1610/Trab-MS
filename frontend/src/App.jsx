@@ -8,6 +8,7 @@ import ChangePassword from "./pages/ChangePassword";
 import ProductList from "./pages/ProductList";
 import UserManagement from "./pages/UserManagement";
 import AppLayout from "./pages/AppLayout";
+
 function App() {
 
   const caminho = window.location.pathname;
@@ -21,6 +22,8 @@ function App() {
     </AppLayout>
   );
 
+  if (caminho === "/reposicao") return renderizar(Ressuprimento);
+  if (caminho === "/giro") return renderizar(GiroEstoque);
   if (caminho === "/cadastro-produto") return renderizar(ProductRegister,true);
   if (caminho === "/trocar-senha") {
     return (

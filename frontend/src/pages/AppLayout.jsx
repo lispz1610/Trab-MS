@@ -20,7 +20,8 @@ export default function AppLayout({ children, usuario, showTabs = true }) {
            alt="Logo Sistema Rabisco" 
 
            className="app-logo" ></img>
-          <h1 className="app-title">Sistema</h1> <h1 className='scnd-app-title'>Rabisco</h1>
+          <span className="app-title">Sistema</span>
+          <span className='scnd-app-title'>Rabisco</span>
         </div>
         
         {/* Só renderiza as tabs se showTabs for true */}

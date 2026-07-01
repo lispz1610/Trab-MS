@@ -33,7 +33,6 @@ function GerenteHome() {
                 Menu do gerente
             </h3>
 
-
             <button
                 onClick={() => {
                     window.location.href = "/cadastro-produto";
@@ -104,7 +103,6 @@ function GerenteHome() {
             <button onClick={fazerLogout}>
                 Sair
             </button>
-
         </div>
 
     )
