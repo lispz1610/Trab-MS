@@ -13,15 +13,9 @@ function FuncionarioHome() {
     }
     return (
 
-        <div>
-
-            <h1>
-                Sistema Rabisco
-            </h1>
-
-
+        <div className="home-container">
             <h2>
-                Bem-vindo, funcionário
+                Bem-vindo, {usuario.nome || "funcionário"} 
             </h2>
 
 
