@@ -8,10 +8,11 @@ export default function ProductRegister() {
     foto: null,
     descricao: '',
     unidadeComprada: '',
+    quantidade: '',
     estoqueMaximo: '',
     estoqueMinimo: '',
     pontoRessuprimento: '',
-    tempoGiro: ''
+    tempoGiro: '',
   });
 
   const [error, setError] = useState('');
@@ -208,11 +209,17 @@ export default function ProductRegister() {
             <textarea name="descricao" value={productData.descricao} onChange={handleChange} placeholder="Descreva os detalhes do produto..." rows="2" />
           </div>
 
+          <div className="form-group">
+            <label>Unidade Comprada*</label>
+            <input type="text" name="unidadeComprada" value={productData.unidadeComprada} onChange={handleChange} placeholder="Ex: Caixa, Unidade, Pacote" />
+          </div>
+
           <div className="form-row">
             <div className="form-group">
-              <label>Unidade Comprada*</label>
-              <input type="text" name="unidadeComprada" value={productData.unidadeComprada} onChange={handleChange} placeholder="Ex: Caixa, Unidade, Pacote" />
+              <label>Quantidade*</label>
+              <input type="number" name="quantidade" value={productData.quantidade} onChange={handleChange} placeholder="Quantidade" />
             </div>
+
             <div className="form-group">
               <label>Tempo de Giro (Dias)*</label>
               <input type="number" name="tempoGiro" value={productData.tempoGiro} onChange={handleChange} placeholder="Dias em estoque" />

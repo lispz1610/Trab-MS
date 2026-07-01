@@ -64,6 +64,14 @@ function FuncionarioHome() {
 
             <button
                 onClick={() => {
+                    window.location.href = "/reposicao"
+                }}
+            >
+                Produtos para reposição
+            </button>
+
+            <button
+                onClick={() => {
                     window.location.href = "/trocar-senha";
                 }}
             >
