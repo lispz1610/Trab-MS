@@ -11,6 +11,8 @@ export default function ProductRegister() {
     estoqueMaximo: '',
     estoqueMinimo: '',
     pontoRessuprimento: '',
+    precoCompra: '',
+    precoVenda: '',
     tempoGiro: ''
   });
 
@@ -228,6 +230,29 @@ export default function ProductRegister() {
               <label>Estoque Máximo*</label>
               <input type="number" name="estoqueMaximo" value={productData.estoqueMaximo} onChange={handleChange} placeholder="Máximo" />
             </div>
+          </div>
+
+          <div className="form-row">
+          <div className="form-group">
+              <label>Preço de Compra (R$)*</label>
+              <input 
+                  type="number" 
+                  name="precoCompra" 
+                  value={productData.precoCompra} 
+                  onChange={handleChange} 
+                  placeholder="0.00" 
+              />
+          </div>
+              <div className="form-group">
+                  <label>Preço de Venda (R$)*</label>
+                  <input 
+                      type="number" 
+                      name="precoVenda" 
+                      value={productData.precoVenda} 
+                      onChange={handleChange} 
+                      placeholder="0.00" 
+                  />
+              </div>
           </div>
 
           <div className="form-group">
