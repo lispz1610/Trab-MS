@@ -69,11 +69,17 @@ function GerenteHome() {
                 Ver estoque
             </button>
 
-
             <button>
                 Relatórios
             </button>
 
+            <button
+                onClick={() => {
+                    window.location.href = "/giro"
+                }}
+            >
+                Produtos com giro excedido
+            </button>
 
             <button
                 onClick={() => {

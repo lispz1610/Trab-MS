@@ -8,6 +8,7 @@ import ChangePassword from "./pages/ChangePassword";
 import ProductList from "./pages/ProductList";
 import UserManagement from "./pages/UserManagement";
 import Ressuprimento from "./pages/Ressuprimento";
+import GiroEstoque from "./pages/GiroEstoque";
 
 function App() {
 
@@ -26,6 +27,8 @@ function App() {
     return <UserManagement />;
   } if (caminho === "/reposicao") {
     return <Ressuprimento />;
+  } if (caminho === "/giro") {
+    return <GiroEstoque />;
   }
 
   const usuario = JSON.parse(
