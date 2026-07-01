@@ -57,7 +57,6 @@ function App() {
   //tirar isso dps
   return <Cadastro />;
 
-
 }
 
 
