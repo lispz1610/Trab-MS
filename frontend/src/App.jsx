@@ -10,8 +10,6 @@ import UserManagement from "./pages/UserManagement";
 
 function App() {
 
-  return <Cadastro />
-/*
   const caminho = window.location.pathname;
   if (caminho === "/cadastro-produto") {
     return <ProductRegister />;
@@ -55,7 +53,6 @@ function App() {
 
   //tirar isso dps
   return <Cadastro />;
-*/
 
 }
 
