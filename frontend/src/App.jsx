@@ -7,60 +7,44 @@ import SupplierRegister from "./pages/SupplierRegister";
 import ChangePassword from "./pages/ChangePassword";
 import ProductList from "./pages/ProductList";
 import UserManagement from "./pages/UserManagement";
-import Ressuprimento from "./pages/Ressuprimento";
-import GiroEstoque from "./pages/GiroEstoque";
-
+import AppLayout from "./pages/AppLayout";
 function App() {
 
   const caminho = window.location.pathname;
-  if (caminho === "/cadastro-produto") {
-    return <ProductRegister />;
-  } if (caminho === "/cadastro-fornecedor") {
-    return <SupplierRegister />;
-  } if (caminho === "/cadastro-funcionario") {
-    return <Cadastro />;
-  } if (caminho === "/trocar-senha") {
-    return <ChangePassword />;
-  } if (caminho === "/estoque") {
-    return <ProductList />;
-  } if (caminho === "/usuarios") {
-    return <UserManagement />;
-  } if (caminho === "/reposicao") {
-    return <Ressuprimento />;
-  } if (caminho === "/giro") {
-    return <GiroEstoque />;
-  }
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
+  
+  if (!usuario) return <Login />;
 
-  const usuario = JSON.parse(
-    localStorage.getItem("usuario")
+  const renderizar = (Componente, showTabs = false) => (
+    <AppLayout usuario={usuario} showTabs={showTabs}>
+      <Componente />
+    </AppLayout>
   );
 
+  if (caminho === "/cadastro-produto") return renderizar(ProductRegister,true);
+  if (caminho === "/trocar-senha") {
+    return (
+      <AppLayout usuario={usuario} showTabs={false}>
+        <ChangePassword />
+      </AppLayout>
+    );
+    }  
+  if (caminho === "/estoque") {
+    return (
+      <AppLayout usuario={usuario} showTabs={false}>
+        <ProductList />
+      </AppLayout>
+    );
+    }  
 
-  //ngm logado
-  if (!usuario) {
-    return <Login />;
+    if (caminho === "/cadastro-funcionario") return renderizar(Cadastro,true);
+    if (caminho === "/cadastro-fornecedor") return renderizar(SupplierRegister,true);
+    if (caminho === "/usuarios") return renderizar(UserManagement);
+    if (caminho === "/home-gerente" || caminho === "/") {
+        return usuario.tipo === "gerente" ? renderizar(GerenteHome) : renderizar(FuncionarioHome);
+    
   }
-
-
-  //gerente
-  if (usuario.tipo === "gerente") {
-
-    return <GerenteHome />;
-
-  }
-
-
-  //funcionário
-  if (usuario.tipo === "funcionario") {
-
-    return <FuncionarioHome />;
-
-  }
-
-  //tirar isso dps
-  return <Cadastro />;
-
+    return renderizar(usuario.tipo === "gerente" ? GerenteHome : FuncionarioHome);
 }
-
 
 export default App;

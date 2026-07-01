@@ -14,14 +14,10 @@ function GerenteHome() {
 
     return (
 
-        <div>
-
-            <h1>
-                Sistema Rabisco
-            </h1>
+        <div className="home-container">
 
             <h2>
-                Bem-vindo, gerente
+                Bem-vindo(a), {usuario.nome || "gerente"}
             </h2>
 
 
