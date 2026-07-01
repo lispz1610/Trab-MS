@@ -11,9 +11,9 @@ export default function ProductRegister() {
     estoqueMaximo: '',
     estoqueMinimo: '',
     pontoRessuprimento: '',
+    tempoGiro: '',
     precoCompra: '',
-    precoVenda: '',
-    tempoGiro: ''
+    precoVenda: ''
   });
 
   const [error, setError] = useState('');
@@ -253,7 +253,8 @@ export default function ProductRegister() {
                       placeholder="0.00" 
                   />
               </div>
-          </div>
+              
+          </div> 
 
           <div className="form-group">
             <label>Ponto de Ressuprimento*</label>
