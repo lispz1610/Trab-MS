@@ -28,5 +28,15 @@
     "estoqueMinimo": "0",
     "pontoRessuprimento": "0",
     "tempoGiro": "100"
+  },
+  {
+    "id": 1782867925835,
+    "nome": "Caderno Barbie",
+    "descricao": "Caderno da Barbie fada ",
+    "unidadeComprada": "Caixa",
+    "estoqueMaximo": "5",
+    "estoqueMinimo": "1",
+    "pontoRessuprimento": "1",
+    "tempoGiro": "100"
   }
 ]

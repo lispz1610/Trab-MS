@@ -1,0 +1,51 @@
+.giro-container {
+
+    padding: 30px;
+
+}
+
+
+.tabela-giro {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    margin-top: 20px;
+
+}
+
+
+.tabela-giro th {
+
+    background: #144477;
+
+    color: white;
+
+    padding: 12px;
+
+    border: 1px solid #ddd;
+
+}
+
+
+.tabela-giro td {
+
+    padding: 12px;
+
+    border: 1px solid #ddd;
+
+    text-align: center;
+
+}
+
+
+.nenhum {
+
+    margin-top: 30px;
+
+    padding: 20px;
+
+    background: #e8f5e9;
+
+}

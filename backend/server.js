@@ -100,19 +100,13 @@ app.post("/produtos", (req, res) => {
 
 
         id: Date.now(),
-
         nome: req.body.nome,
-
         descricao: req.body.descricao,
-
         unidadeComprada: req.body.unidadeComprada,
-
+        quantidade: req.body.quantidade,
         estoqueMaximo: req.body.estoqueMaximo,
-
         estoqueMinimo: req.body.estoqueMinimo,
-
         pontoRessuprimento: req.body.pontoRessuprimento,
-
         tempoGiro: req.body.tempoGiro
 
     };
