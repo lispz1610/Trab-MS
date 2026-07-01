@@ -3,14 +3,14 @@
     "id": 1,
     "nome": "Maria Fernanda Gomes",
     "email": "admin@email.com",
-    "senha": "123123",
+    "senha": "$2b$10$Hq9PxFp31W/jKUh39XIk7edBoRcezeyCVwuVfcosQS4JJfkFYmYMC",
     "tipo": "gerente"
   },
   {
     "id": 1782828713634,
     "nome": "Mariana Maria Marina",
     "email": "mari@rabisco.com",
-    "senha": "123456",
+    "senha": "$2b$10$KAig3S9a.RIxsyBrKORLX.5CfqRCOSHBe84qUVPcU/GWaMD8/syWe",
     "tipo": "funcionario"
   }
 ]
