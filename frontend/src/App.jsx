@@ -8,6 +8,7 @@ import ChangePassword from "./pages/ChangePassword";
 import ProductList from "./pages/ProductList";
 import UserManagement from "./pages/UserManagement";
 import AppLayout from "./pages/AppLayout";
+
 function App() {
 
   const caminho = window.location.pathname;
