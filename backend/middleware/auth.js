@@ -30,4 +30,16 @@ function autenticar(req, res, next) {
   }
 }
 
-module.exports = { gerarToken, autenticar };
+function autorizar(...tipos) {
+  return (req, res, next) => {
+    if (!req.usuario) {
+      return res.status(401).json({ mensagem: "Não autenticado" });
+    }
+    if (!tipos.includes(req.usuario.tipo)) {
+      return res.status(403).json({ mensagem: "Acesso negado: permissão insuficiente" });
+    }
+    next();
+  };
+}
+
+module.exports = { gerarToken, autenticar, autorizar };

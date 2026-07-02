@@ -65,6 +65,12 @@ db.exec(`
 // --- Migracao de schema em banco existente ---
 
 function migrarSchema() {
+  // Produtos: adiciona foto se nao existir
+  try {
+    db.exec("ALTER TABLE produtos ADD COLUMN foto TEXT NOT NULL DEFAULT ''");
+    console.log("  coluna produtos.foto adicionada");
+  } catch (e) { /* ja existe */ }
+
   // Produtos: adiciona codigoBarras se nao existir
   try {
     db.exec("ALTER TABLE produtos ADD COLUMN codigoBarras TEXT NOT NULL DEFAULT ''");

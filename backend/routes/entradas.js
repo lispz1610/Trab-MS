@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const db = require("../db/database");
-const { autenticar } = require("../middleware/auth");
+const { autenticar, autorizar } = require("../middleware/auth");
 const { validarCampos } = require("../middleware/validacao");
 
 const router = Router();
@@ -53,7 +53,7 @@ router.post("/", autenticar, validarCampos(["produtoId", "quantidade", "precoEnt
 });
 
 // GET /entradas/relatorio?inicio=YYYY-MM-DD&fim=YYYY-MM-DD&produtoId=X
-router.get("/relatorio", autenticar, (req, res) => {
+router.get("/relatorio", autenticar, autorizar("gerente"), (req, res) => {
   let where = [];
   let params = [];
 
@@ -94,6 +94,35 @@ router.get("/relatorio", autenticar, (req, res) => {
     totais,
     entradas
   });
+});
+
+// GET /entradas/codigo-barras/:codigo — consulta por codigo de barras (RF9)
+router.get("/codigo-barras/:codigo", autenticar, (req, res) => {
+  const entradas = db.prepare(`
+    SELECT e.id, e.data, e.codigoBarras, e.quantidade, e.precoEntrada,
+           p.id AS produtoId, p.nome AS produtoNome
+    FROM entradas e
+    LEFT JOIN produtos p ON p.id = e.produtoId
+    WHERE e.codigoBarras = ?
+    ORDER BY e.data DESC
+  `).all(req.params.codigo);
+
+  if (entradas.length === 0) {
+    return res.status(404).json({ mensagem: "Nenhuma entrada encontrada com este código de barras" });
+  }
+
+  const agora = new Date();
+  const resultados = entradas.map(e => {
+    const dataEntrada = new Date(e.data + "Z");
+    const diasNoEstoque = Math.floor((agora - dataEntrada) / (1000 * 60 * 60 * 24));
+    return {
+      ...e,
+      dataEntrada: e.data,
+      diasNoEstoque
+    };
+  });
+
+  res.json(resultados);
 });
 
 module.exports = router;

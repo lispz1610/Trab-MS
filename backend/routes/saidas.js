@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const db = require("../db/database");
-const { autenticar } = require("../middleware/auth");
+const { autenticar, autorizar } = require("../middleware/auth");
 const { validarCampos } = require("../middleware/validacao");
 
 const router = Router();
@@ -60,7 +60,7 @@ router.post("/", autenticar, validarCampos(["produtoId", "quantidade", "precoSai
 });
 
 // GET /saidas/relatorio?inicio=YYYY-MM-DD&fim=YYYY-MM-DD&produtoId=X
-router.get("/relatorio", autenticar, (req, res) => {
+router.get("/relatorio", autenticar, autorizar("gerente"), (req, res) => {
   let where = [];
   let params = [];
 

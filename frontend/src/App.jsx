@@ -8,6 +8,13 @@ import ChangePassword from "./pages/ChangePassword";
 import ProductList from "./pages/ProductList";
 import UserManagement from "./pages/UserManagement";
 import AppLayout from "./pages/AppLayout";
+import EntradaRegister from "./pages/EntradaRegister";
+import SaidaRegister from "./pages/SaidaRegister";
+import RelatorioEntradas from "./pages/RelatorioEntradas";
+import RelatorioSaidas from "./pages/RelatorioSaidas";
+import ProductManagement from "./pages/ProductManagement";
+import ConsultaCodigoBarras from "./pages/ConsultaCodigoBarras";
+import RelatorioGeral from "./pages/RelatorioGeral";
 
 function App() {
 
@@ -41,6 +48,13 @@ function App() {
     }  
 
     if (caminho === "/cadastro-funcionario") return renderizar(Cadastro,true);
+    if (caminho === "/entrada") return renderizar(EntradaRegister,true);
+    if (caminho === "/saida") return renderizar(SaidaRegister,true);
+    if (caminho === "/relatorio-entradas") return renderizar(RelatorioEntradas);
+    if (caminho === "/relatorio-saidas") return renderizar(RelatorioSaidas);
+    if (caminho === "/gerenciar-produtos") return renderizar(ProductManagement);
+    if (caminho === "/consulta-codigo-barras") return renderizar(ConsultaCodigoBarras);
+    if (caminho === "/relatorio-geral") return renderizar(RelatorioGeral);
     if (caminho === "/cadastro-fornecedor") return renderizar(SupplierRegister,true);
     if (caminho === "/usuarios") return renderizar(UserManagement);
     if (caminho === "/home-gerente" || caminho === "/") {
