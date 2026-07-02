@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { UserPlus, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { apiFetch } from "../api";
 import './UserRegister.css';
 
 export default function UserRegister() {
@@ -60,37 +61,18 @@ export default function UserRegister() {
     try {
 
 
-      const resposta = await fetch(
-        "http://localhost:3000/usuarios",
-        {
-
+      const resposta = await apiFetch("/usuarios", {
           method: "POST",
-
-          headers: {
-            "Content-Type": "application/json"
-          },
-
-
           body: JSON.stringify({
-
             nome: formData.nome,
-
             email: formData.email,
-
             senha: formData.senha,
-
-
-            // transforma o valor do rádio
             tipo:
               formData.perfil === "Gerente"
                 ? "gerente"
                 : "funcionario"
-
-
           })
-
-        }
-      );
+        });
 
 
       const dados = await resposta.json();

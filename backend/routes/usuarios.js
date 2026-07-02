@@ -1,19 +1,19 @@
 const { Router } = require("express");
 const bcrypt = require("bcryptjs");
 const db = require("../db/database");
-const { autenticar } = require("../middleware/auth");
+const { autenticar, autorizar } = require("../middleware/auth");
 const { validarCampos } = require("../middleware/validacao");
 
 const router = Router();
 
 // GET /usuarios
-router.get("/", autenticar, (_req, res) => {
+router.get("/", autenticar, autorizar("gerente"), (_req, res) => {
   const usuarios = db.prepare("SELECT id, nome, email, tipo FROM usuarios").all();
   res.json(usuarios);
 });
 
 // POST /usuarios
-router.post("/", autenticar, validarCampos(["nome", "email", "senha", "tipo"]), (req, res) => {
+router.post("/", autenticar, autorizar("gerente"), validarCampos(["nome", "email", "senha", "tipo"]), (req, res) => {
   const existe = db.prepare("SELECT id FROM usuarios WHERE email = ?").get(req.body.email);
   if (existe) {
     return res.status(400).json({ mensagem: "Email já cadastrado" });
@@ -30,7 +30,7 @@ router.post("/", autenticar, validarCampos(["nome", "email", "senha", "tipo"]), 
 });
 
 // PUT /usuarios/:id
-router.put("/:id", autenticar, validarCampos(["email", "tipo"]), (req, res) => {
+router.put("/:id", autenticar, autorizar("gerente"), validarCampos(["email", "tipo"]), (req, res) => {
   const usuario = db.prepare("SELECT * FROM usuarios WHERE id = ?").get(Number(req.params.id));
   if (!usuario) {
     return res.status(404).json({ mensagem: "Usuário não encontrado" });
@@ -49,7 +49,7 @@ router.put("/:id", autenticar, validarCampos(["email", "tipo"]), (req, res) => {
 });
 
 // DELETE /usuarios/:id
-router.delete("/:id", autenticar, (req, res) => {
+router.delete("/:id", autenticar, autorizar("gerente"), (req, res) => {
   db.prepare("DELETE FROM usuarios WHERE id = ?").run(Number(req.params.id));
   res.json({ sucesso: true });
 });

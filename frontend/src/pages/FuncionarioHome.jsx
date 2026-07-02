@@ -47,12 +47,20 @@ function FuncionarioHome() {
             </button>
 
 
-            <button>
+            <button
+                onClick={() => {
+                    window.location.href = "/entrada"
+                }}
+            >
                 Registrar entrada
             </button>
 
 
-            <button>
+            <button
+                onClick={() => {
+                    window.location.href = "/saida"
+                }}
+            >
                 Registrar saída
             </button>
 
@@ -66,10 +74,26 @@ function FuncionarioHome() {
 
             <button
                 onClick={() => {
+                    window.location.href = "/consulta-codigo-barras"
+                }}
+            >
+                Consultar código de barras
+            </button>
+
+            <button
+                onClick={() => {
                     window.location.href = "/trocar-senha";
                 }}
             >
                 Trocar senha
+            </button>
+
+            <button
+                onClick={() => {
+                    window.location.href = "/relatorio-geral"
+                }}
+            >
+                Relatório geral do estoque
             </button>
 
             <button onClick={fazerLogout}>

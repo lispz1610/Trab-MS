@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Package, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { apiFetch } from "../api";
 import './ProductRegister.css';
 
 export default function ProductRegister() {
@@ -97,37 +98,23 @@ export default function ProductRegister() {
     try {
 
 
-      const resposta = await fetch(
-        "http://localhost:3000/produtos",
-        {
+      const formData = new FormData();
+      formData.append("nome", productData.nome);
+      formData.append("descricao", productData.descricao);
+      formData.append("unidadeComprada", productData.unidadeComprada);
+      formData.append("quantidade", productData.quantidade || "0");
+      formData.append("estoqueMaximo", productData.estoqueMaximo);
+      formData.append("estoqueMinimo", productData.estoqueMinimo);
+      formData.append("pontoRessuprimento", productData.pontoRessuprimento);
+      formData.append("tempoGiro", productData.tempoGiro);
+      if (productData.foto) {
+        formData.append("foto", productData.foto);
+      }
 
+      const resposta = await apiFetch("/produtos", {
           method: "POST",
-
-          headers: {
-            "Content-Type": "application/json"
-          },
-
-
-          body: JSON.stringify({
-
-            nome: productData.nome,
-
-            descricao: productData.descricao,
-
-            unidadeComprada: productData.unidadeComprada,
-
-            estoqueMaximo: productData.estoqueMaximo,
-
-            estoqueMinimo: productData.estoqueMinimo,
-
-            pontoRessuprimento: productData.pontoRessuprimento,
-
-            tempoGiro: productData.tempoGiro
-
-          })
-
-        }
-      );
+          body: formData
+        });
 
 
       const dados = await resposta.json();

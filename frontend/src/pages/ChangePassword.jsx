@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { apiFetch } from "../api";
 import './ChangePassword.css';
 
 function ChangePassword() {
@@ -22,32 +23,13 @@ function ChangePassword() {
             return;
         }
 
-        const usuario = JSON.parse(
-            localStorage.getItem("usuario")
-        );
-
-        const resposta = await fetch(
-            "http://localhost:3000/trocar-senha",
-            {
-
-                method: "PUT",
-
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                body: JSON.stringify({
-
-                    id: usuario.id,
-
-                    senhaAntiga,
-
-                    novaSenha
-
-                })
-
-            }
-        );
+        const resposta = await apiFetch("/trocar-senha", {
+            method: "PUT",
+            body: JSON.stringify({
+                senhaAntiga,
+                novaSenha
+            })
+        });
 
         const dados = await resposta.json();
 

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Truck, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { apiFetch } from "../api";
 import './SupplierRegister.css';
 
 export default function SupplierRegister() {
@@ -49,28 +50,14 @@ export default function SupplierRegister() {
 
     try {
 
-      const resposta = await fetch(
-        "http://localhost:3000/fornecedores",
-        {
-
+      const resposta = await apiFetch("/fornecedores", {
           method: "POST",
-
-          headers: {
-            "Content-Type": "application/json"
-          },
-
           body: JSON.stringify({
-
             cnpj: cnpjLimpo,
-
             nome: supplierData.nome,
-
             telefone: telefoneLimpo
-
           })
-
-        }
-      );
+        });
 
 
       const dados = await resposta.json();

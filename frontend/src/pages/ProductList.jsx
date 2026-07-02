@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { apiFetch } from "../api";
 import "./ProductList.css";
 
 function ProductList() {
@@ -8,9 +9,7 @@ function ProductList() {
 
     async function carregarProdutos() {
 
-        const resposta = await fetch(
-            "http://localhost:3000/produtos"
-        );
+        const resposta = await apiFetch("/produtos");
 
         const dados = await resposta.json();
         setProdutos(dados);
@@ -22,39 +21,6 @@ function ProductList() {
         carregarProdutos();
 
     }, []);
-
-    function tempoNoEstoque(id) {
-
-        const dataCadastro = new Date(id);
-
-        const hoje = new Date();
-
-
-        const diferenca = hoje - dataCadastro;
-
-
-        const dias = Math.floor(
-            diferenca / (1000 * 60 * 60 * 24)
-        );
-
-
-        if (dias === 0) {
-
-            return "Hoje";
-
-        }
-
-
-        if (dias === 1) {
-
-            return "1 dia";
-
-        }
-
-
-        return `${dias} dias`;
-
-    }
 
     const produtosFiltrados = produtos.filter(
         produto =>
@@ -86,27 +52,29 @@ function ProductList() {
                 <table className="tabela">
                     <thead>
                         <tr>
+                            <th className="th">Código de Barras</th>
                             <th className="th">Produto</th>
-                            <th className="th">Descrição</th>
                             <th className="th">Unidade</th>
+                            <th className="th">Saldo em Estoque</th>
                             <th className="th">Estoque Máximo</th>
                             <th className="th">Estoque Mínimo</th>
-                            <th className="th">Ponto Ressuprimento</th>
-                            <th className="th">Tempo no Estoque</th>
-                            <th className="th">Preço da unidade</th>
+                            <th className="th">Data e Hora da Última Entrada</th>
                         </tr>
                     </thead>
                     <tbody>
                         {produtosFiltrados.map(produto => (
                             <tr key={produto.id}>
                                 <td className="td">
+                                    {produto.ultimoCodigoBarras || "-"}
+                                </td>
+                                <td className="td">
                                     {produto.nome}
                                 </td>
                                 <td className="td">
-                                    {produto.descricao}
+                                    {produto.unidadeComprada}
                                 </td>
                                 <td className="td">
-                                    {produto.unidadeComprada}
+                                    {produto.quantidade}
                                 </td>
                                 <td className="td">
                                     {produto.estoqueMaximo}
@@ -115,10 +83,7 @@ function ProductList() {
                                     {produto.estoqueMinimo}
                                 </td>
                                 <td className="td">
-                                    {produto.pontoRessuprimento}
-                                </td>
-                                <td className="td">
-                                    {tempoNoEstoque(produto.id)}
+                                    {produto.ultimaEntrada || "-"}
                                 </td>
                             </tr>
                         ))}

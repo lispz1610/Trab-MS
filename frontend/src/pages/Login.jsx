@@ -37,9 +37,14 @@ function Login() {
 
             if (dados.sucesso) {
 
+                const usuarioComToken = {
+                    ...dados.usuario,
+                    token: dados.token
+                };
+
                 localStorage.setItem(
                     "usuario",
-                    JSON.stringify(dados.usuario)
+                    JSON.stringify(usuarioComToken)
                 );
 
 
@@ -51,11 +56,11 @@ function Login() {
 
                 if (dados.usuario.tipo === "gerente") {
 
-                    window.location.href = "/gerente";
+                    window.location.href = "/home-gerente";
 
                 } else {
 
-                    window.location.href = "/funcionario";
+                    window.location.href = "/";
 
                 }
 

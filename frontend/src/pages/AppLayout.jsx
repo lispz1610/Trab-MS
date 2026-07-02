@@ -33,20 +33,40 @@ export default function AppLayout({ children, usuario, showTabs = true }) {
             >
               Cadastro de produtos
             </button>
-            
+
+            <button
+              className={caminho === '/entrada' ? 'tab-btn tab-btn-active' : 'tab-btn'}
+              onClick={() => window.location.href = '/entrada'}
+            >
+              Registrar entrada
+            </button>
+
+            <button
+              className={caminho === '/saida' ? 'tab-btn tab-btn-active' : 'tab-btn'}
+              onClick={() => window.location.href = '/saida'}
+            >
+              Registrar saída
+            </button>
+
             {usuario?.tipo === 'gerente' && (
               <>
-                <button 
+                <button
                   className={caminho === '/cadastro-funcionario' ? 'tab-btn tab-btn-active' : 'tab-btn'}
                   onClick={() => window.location.href = '/cadastro-funcionario'}
                 >
                   Cadastro de funcionários
                 </button>
-                <button 
+                <button
                   className={caminho === '/cadastro-fornecedor' ? 'tab-btn tab-btn-active' : 'tab-btn'}
                   onClick={() => window.location.href = '/cadastro-fornecedor'}
                 >
                   Cadastro de fornecedores
+                </button>
+                <button
+                  className={caminho === '/gerenciar-produtos' ? 'tab-btn tab-btn-active' : 'tab-btn'}
+                  onClick={() => window.location.href = '/gerenciar-produtos'}
+                >
+                  Editar/Excluir produtos
                 </button>
               </>
             )}

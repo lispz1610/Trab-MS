@@ -1,31 +1,21 @@
 import { useEffect, useState } from "react";
-
+import { apiFetch } from "../api";
 
 function UserManagement() {
-
 
     const [usuarios, setUsuarios] = useState([]);
 
     const [editando, setEditando] = useState(null);
 
-
-
     async function carregarUsuarios() {
 
-
-        const resposta = await fetch(
-            "http://localhost:3000/usuarios"
-        );
-
+        const resposta = await apiFetch("/usuarios");
 
         const dados = await resposta.json();
-
 
         setUsuarios(dados);
 
     }
-
-
 
     useEffect(() => {
 
@@ -33,72 +23,36 @@ function UserManagement() {
 
     }, []);
 
-
-
-
-
     async function excluir(id) {
 
-
-        await fetch(
-            `http://localhost:3000/usuarios/${id}`,
-            {
-                method: "DELETE"
-            }
-        );
-
+        await apiFetch(`/usuarios/${id}`, { method: "DELETE" });
 
         carregarUsuarios();
 
-
     }
-
-
-
-
 
     async function salvarEdicao(usuario) {
 
-
-        await fetch(
-            `http://localhost:3000/usuarios/${usuario.id}`,
-            {
-
-                method: "PUT",
-
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-
-                body: JSON.stringify(usuario)
-
-            }
-        );
-
+        await apiFetch(`/usuarios/${usuario.id}`, {
+            method: "PUT",
+            body: JSON.stringify(usuario)
+        });
 
         setEditando(null);
 
         carregarUsuarios();
 
-
     }
-
-
-
 
     return (
 
         <div>
 
-
             <h1>
                 Gerenciar usuários
             </h1>
 
-
             <table style={styles.table}>
-
 
                 <thead>
 
@@ -112,17 +66,12 @@ function UserManagement() {
 
                 </thead>
 
-
-
                 <tbody>
-
 
                     {
                         usuarios.map(usuario => (
 
-
                             <tr key={usuario.id}>
-
 
                                 <td>
 
@@ -147,8 +96,6 @@ function UserManagement() {
 
                                 </td>
 
-
-
                                 <td>
 
                                     {
@@ -172,7 +119,6 @@ function UserManagement() {
                                                     Funcionário
                                                 </option>
 
-
                                             </select>
 
                                             :
@@ -181,18 +127,12 @@ function UserManagement() {
 
                                     }
 
-
                                 </td>
-
-
-
 
                                 <td>
 
-
                                     {
                                         editando?.id === usuario.id ?
-
 
                                             <button
                                                 onClick={() => salvarEdicao(editando)}
@@ -200,9 +140,7 @@ function UserManagement() {
                                                 Salvar
                                             </button>
 
-
                                             :
-
 
                                             <button
                                                 onClick={() => setEditando(usuario)}
@@ -210,10 +148,7 @@ function UserManagement() {
                                                 Editar
                                             </button>
 
-
                                     }
-
-
 
                                     <button
                                         onClick={() => excluir(usuario.id)}
@@ -221,33 +156,23 @@ function UserManagement() {
                                         Excluir
                                     </button>
 
-
-
                                 </td>
 
-
                             </tr>
-
 
                         ))
 
                     }
 
-
-
                 </tbody>
 
-
             </table>
-
 
         </div>
 
     )
 
 }
-
-
 
 const styles = {
 
@@ -257,6 +182,5 @@ const styles = {
     }
 
 }
-
 
 export default UserManagement;

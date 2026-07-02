@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const db = require("../db/database");
-const { autenticar } = require("../middleware/auth");
+const { autenticar, autorizar } = require("../middleware/auth");
 const { validarCampos } = require("../middleware/validacao");
 
 const router = Router();
@@ -10,7 +10,7 @@ router.get("/", autenticar, (_req, res) => {
   res.json(fornecedores);
 });
 
-router.post("/", autenticar, validarCampos(["nome", "cnpj", "telefone"]), (req, res) => {
+router.post("/", autenticar, autorizar("gerente"), validarCampos(["nome", "cnpj", "telefone"]), (req, res) => {
   const info = db.prepare("INSERT INTO fornecedores (nome, cnpj, telefone) VALUES (?, ?, ?)").run(
     req.body.nome, req.body.cnpj, req.body.telefone
   );
@@ -19,7 +19,7 @@ router.post("/", autenticar, validarCampos(["nome", "cnpj", "telefone"]), (req, 
   res.status(201).json(fornecedor);
 });
 
-router.put("/:id", autenticar, validarCampos(["nome", "cnpj", "telefone"]), (req, res) => {
+router.put("/:id", autenticar, autorizar("gerente"), validarCampos(["nome", "cnpj", "telefone"]), (req, res) => {
   const existente = db.prepare("SELECT id FROM fornecedores WHERE id = ?").get(Number(req.params.id));
   if (!existente) {
     return res.status(404).json({ mensagem: "Fornecedor não encontrado" });
@@ -33,7 +33,7 @@ router.put("/:id", autenticar, validarCampos(["nome", "cnpj", "telefone"]), (req
   res.json(fornecedor);
 });
 
-router.delete("/:id", autenticar, (req, res) => {
+router.delete("/:id", autenticar, autorizar("gerente"), (req, res) => {
   const existente = db.prepare("SELECT id FROM fornecedores WHERE id = ?").get(Number(req.params.id));
   if (!existente) {
     return res.status(404).json({ mensagem: "Fornecedor não encontrado" });

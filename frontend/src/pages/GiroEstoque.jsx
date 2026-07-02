@@ -1,24 +1,20 @@
 import { useEffect, useState } from "react";
+import { apiFetch } from "../api";
 import "./GiroEstoque.css";
-
 
 export default function GiroEstoque() {
 
-
     const [produtos, setProdutos] = useState([]);
 
+    function calcularDiasNoEstoque(ultimaEntrada) {
 
+        if (!ultimaEntrada) return null;
 
-    function calcularDiasNoEstoque(id) {
-
-
-        const dataCadastro = new Date(id);
+        const dataCadastro = new Date(ultimaEntrada);
 
         const hoje = new Date();
 
-
         const diferenca = hoje - dataCadastro;
-
 
         return Math.floor(
             diferenca / (1000 * 60 * 60 * 24)
@@ -26,40 +22,27 @@ export default function GiroEstoque() {
 
     }
 
-
-
-
-
     async function carregarProdutos() {
 
-
-        const resposta = await fetch(
-            "http://localhost:3000/produtos"
-        );
-
+        const resposta = await apiFetch("/produtos");
 
         const dados = await resposta.json();
-
-
 
         const atrasados = dados.filter(
 
             produto =>
 
-                calcularDiasNoEstoque(produto.id)
+                Number(produto.tempoGiro) > 0 &&
+                produto.ultimaEntrada &&
+                calcularDiasNoEstoque(produto.ultimaEntrada)
                 >
                 Number(produto.tempoGiro)
 
         );
 
-
         setProdutos(atrasados);
 
-
     }
-
-
-
 
     useEffect(() => {
 
@@ -67,19 +50,13 @@ export default function GiroEstoque() {
 
     }, []);
 
-
-
-
     return (
 
         <div className="giro-container">
 
-
             <h1>
                 Produtos com Giro Excedido
             </h1>
-
-
 
             {
 
@@ -93,12 +70,9 @@ export default function GiroEstoque() {
 
                     </div>
 
-
                     :
 
-
                     <table className="tabela-giro">
-
 
                         <thead>
 
@@ -109,7 +83,15 @@ export default function GiroEstoque() {
                                 </th>
 
                                 <th>
+                                    Código de Barras
+                                </th>
+
+                                <th>
                                     Dias no estoque
+                                </th>
+
+                                <th>
+                                    Data e Hora de Entrada
                                 </th>
 
                                 <th>
@@ -124,32 +106,33 @@ export default function GiroEstoque() {
 
                         </thead>
 
-
-
                         <tbody>
-
 
                             {
 
                                 produtos.map(produto => (
 
-
                                     <tr key={produto.id}>
-
 
                                         <td>
                                             {produto.nome}
                                         </td>
 
+                                        <td>
+                                            {produto.ultimoCodigoBarras || "-"}
+                                        </td>
 
                                         <td>
 
                                             {
-                                                calcularDiasNoEstoque(produto.id)
+                                                calcularDiasNoEstoque(produto.ultimaEntrada)
                                             }
 
                                         </td>
 
+                                        <td>
+                                            {produto.ultimaEntrada || "-"}
+                                        </td>
 
                                         <td>
 
@@ -157,31 +140,23 @@ export default function GiroEstoque() {
 
                                         </td>
 
-
                                         <td>
 
                                             {produto.quantidade}
 
                                         </td>
 
-
-
                                     </tr>
-
 
                                 ))
 
                             }
 
-
                         </tbody>
-
 
                     </table>
 
-
             }
-
 
         </div>
 

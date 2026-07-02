@@ -45,11 +45,14 @@ function GerenteHome() {
                 Registrar entrada
             </button>
 
-            <button onClick={() => {
-                window.location.href = "/registrar-saida";
-            }}>
-                Registrar saída
+            <button
+                onClick={() => {
+                    window.location.href = "/gerenciar-produtos"
+                }}
+            >
+                Editar / Excluir produtos
             </button>
+
 
             <button
                 onClick={() => {
@@ -74,8 +77,44 @@ function GerenteHome() {
                 Ver estoque
             </button>
 
-            <button>
-                Relatórios
+            <button
+                onClick={() => {
+                    window.location.href = "/entrada"
+                }}
+            >
+                Registrar entrada
+            </button>
+
+            <button
+                onClick={() => {
+                    window.location.href = "/saida"
+                }}
+            >
+                Registrar saída
+            </button>
+
+            <button
+                onClick={() => {
+                    window.location.href = "/relatorio-entradas"
+                }}
+            >
+                Relatório de entradas
+            </button>
+
+            <button
+                onClick={() => {
+                    window.location.href = "/relatorio-saidas"
+                }}
+            >
+                Relatório de saídas
+            </button>
+
+            <button
+                onClick={() => {
+                    window.location.href = "/relatorio-geral"
+                }}
+            >
+                Relatório geral do estoque
             </button>
 
             <button
@@ -84,6 +123,14 @@ function GerenteHome() {
                 }}
             >
                 Produtos com giro excedido
+            </button>
+
+            <button
+                onClick={() => {
+                    window.location.href = "/consulta-codigo-barras"
+                }}
+            >
+                Consultar código de barras
             </button>
 
             <button
