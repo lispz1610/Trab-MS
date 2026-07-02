@@ -39,11 +39,6 @@ function GerenteHome() {
                 }}>
                 Cadastrar produtos
             </button>
-            <button onClick={() => {
-                window.location.href = "/registrar-entrada";
-            }}>
-                Registrar entrada
-            </button>
 
             <button
                 onClick={() => {

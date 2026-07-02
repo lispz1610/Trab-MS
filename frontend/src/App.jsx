@@ -15,6 +15,8 @@ import RelatorioSaidas from "./pages/RelatorioSaidas";
 import ProductManagement from "./pages/ProductManagement";
 import ConsultaCodigoBarras from "./pages/ConsultaCodigoBarras";
 import RelatorioGeral from "./pages/RelatorioGeral";
+import GiroEstoque from "./pages/GiroEstoque";
+import Ressuprimento from "./pages/Ressuprimento";
 
 function App() {
 
