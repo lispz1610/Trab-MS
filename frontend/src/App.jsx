@@ -15,6 +15,8 @@ import RelatorioSaidas from "./pages/RelatorioSaidas";
 import ProductManagement from "./pages/ProductManagement";
 import ConsultaCodigoBarras from "./pages/ConsultaCodigoBarras";
 import RelatorioGeral from "./pages/RelatorioGeral";
+import GiroEstoque from "./pages/GiroEstoque";
+import Ressuprimento from "./pages/Ressuprimento";
 
 function App() {
 
@@ -28,7 +30,6 @@ function App() {
       <Componente />
     </AppLayout>
   );
-
   if (caminho === "/reposicao") return renderizar(Ressuprimento);
   if (caminho === "/giro") return renderizar(GiroEstoque);
   if (caminho === "/cadastro-produto") return renderizar(ProductRegister,true);
