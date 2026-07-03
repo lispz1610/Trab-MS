@@ -35,9 +35,9 @@ function App() {
   if (caminho === "/cadastro-produto") return renderizar(ProductRegister,true);
   if (caminho === "/trocar-senha") {
     return (
-      <AppLayout usuario={usuario} showTabs={false}>
+      //<AppLayout usuario={usuario} showTabs={false}>
         <ChangePassword />
-      </AppLayout>
+      //</AppLayout>
     );
     }  
   if (caminho === "/estoque") {
@@ -47,7 +47,7 @@ function App() {
       </AppLayout>
     );
     }  
-
+    if(caminho == "trocar-senha") return Troca
     if (caminho === "/cadastro-funcionario") return renderizar(Cadastro,true);
     if (caminho === "/entrada") return renderizar(EntradaRegister,true);
     if (caminho === "/saida") return renderizar(SaidaRegister,true);

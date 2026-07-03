@@ -45,7 +45,7 @@ function GerenteHome() {
                     window.location.href = "/gerenciar-produtos"
                 }}
             >
-                Editar / Excluir produtos
+                Gerenciar produtos
             </button>
 
 
