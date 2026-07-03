@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { apiFetch } from "../api";
+import './ProductManagement.css'
 
 export default function ProductManagement() {
 
@@ -53,13 +54,13 @@ export default function ProductManagement() {
     }
 
     return (
-        <div>
-            <h1>Gerenciar Produtos</h1>
+        <div className="container">
+            <h1 className="title">Gerenciar Produtos</h1>
 
-            {mensagem && <p style={{ color: "green" }}>{mensagem}</p>}
-            {erro && <p style={{ color: "red" }}>{erro}</p>}
+            {mensagem && <p className="msg-success">{mensagem}</p>}
+            {erro && <p className="msg-error">{erro}</p>}
 
-            <table style={{ width: "100%", borderCollapse: "collapse" }}>
+            <table className="product-table">
                 <thead>
                     <tr>
                         <th>Produto</th>
@@ -70,7 +71,7 @@ export default function ProductManagement() {
                         <th>Est. Mín</th>
                         <th>Ponto Ressup.</th>
                         <th>Tempo Giro</th>
-                        <th>Ações</th>
+                        <th style={{ textAlign: "center" }}>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -84,9 +85,11 @@ export default function ProductManagement() {
                             <td>{p.estoqueMinimo}</td>
                             <td>{p.pontoRessuprimento}</td>
                             <td>{p.tempoGiro}</td>
-                            <td>
-                                <button onClick={() => setEditando(p)}>Editar</button>
-                                <button onClick={() => excluir(p.id)}>Excluir</button>
+                            <td style={{ textAlign: "center" }}>
+                                <div className="action-buttons">
+                                <button className="btn-edit" onClick={() => setEditando(p)}>Editar</button>
+                                <button className="btn-delete" onClick={() => excluir(p.id)}>Excluir</button>
+                                </div>
                             </td>
                         </tr>
                     ))}
@@ -97,44 +100,60 @@ export default function ProductManagement() {
                 <div style={{
                     position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
                     background: "rgba(0,0,0,0.5)", display: "flex",
-                    justifyContent: "center", alignItems: "center", zIndex: 1000
-                }}>
-                    <div style={{
+                    justifyContent: "center", alignItems: "center", zIndex: 1000}}>
+                    <div className="modal-content"className="modal-content" style={{
                         background: "#fff", padding: "2rem", borderRadius: "8px",
                         width: "500px", maxHeight: "90vh", overflowY: "auto"
                     }}>
                         <h2>Editar Produto</h2>
                         <form onSubmit={salvarEdicao}>
-                            <label>Nome</label>
-                            <input name="nome" defaultValue={editando.nome} required style={{ width: "100%", marginBottom: "0.5rem" }} />
-
+                            <div className="form-group">
+                                <label>Nome</label>
+                                <input name="nome" defaultValue={editando.nome} required  />
+                            </div>
+                            <div className="form-group">
                             <label>Descrição</label>
-                            <input name="descricao" defaultValue={editando.descricao} required style={{ width: "100%", marginBottom: "0.5rem" }} />
+                                <input name="descricao" defaultValue={editando.descricao} required  />
+                            </div>
 
-                            <label>Unidade Comprada</label>
-                            <input name="unidadeComprada" defaultValue={editando.unidadeComprada} required style={{ width: "100%", marginBottom: "0.5rem" }} />
+                            <div className="form-group">
+                                <label>Unidade Comprada</label>
+                                <input name="unidadeComprada" defaultValue={editando.unidadeComprada} required  />
+                            </div>
 
-                            <label>Quantidade</label>
-                            <input name="quantidade" type="number" defaultValue={editando.quantidade} style={{ width: "100%", marginBottom: "0.5rem" }} />
+                            <div className="form-group">
+                                <label>Quantidade</label>
+                                <input name="quantidade" type="number" defaultValue={editando.quantidade}  />
+                            </div>
 
-                            <label>Estoque Máximo</label>
-                            <input name="estoqueMaximo" type="number" defaultValue={editando.estoqueMaximo} style={{ width: "100%", marginBottom: "0.5rem" }} />
+                            <div className="form-group">
+                                <label>Estoque Máximo</label>
+                                <input name="estoqueMaximo" type="number" defaultValue={editando.estoqueMaximo}  />
+                            </div>
 
-                            <label>Estoque Mínimo</label>
-                            <input name="estoqueMinimo" type="number" defaultValue={editando.estoqueMinimo} style={{ width: "100%", marginBottom: "0.5rem" }} />
+                            <div className="form-group">
+                                <label>Estoque Mínimo</label>
+                                <input name="estoqueMinimo" type="number" defaultValue={editando.estoqueMinimo}  />
+                            </div>
 
-                            <label>Ponto de Ressuprimento</label>
-                            <input name="pontoRessuprimento" type="number" defaultValue={editando.pontoRessuprimento} style={{ width: "100%", marginBottom: "0.5rem" }} />
+                            <div className="form-group">
+                                <label>Ponto de Ressuprimento</label>
+                                <input name="pontoRessuprimento" type="number" defaultValue={editando.pontoRessuprimento}  />
+                            </div>
 
-                            <label>Tempo de Giro (dias)</label>
-                            <input name="tempoGiro" type="number" defaultValue={editando.tempoGiro} style={{ width: "100%", marginBottom: "0.5rem" }} />
+                            <div className="form-group">
+                                <label>Tempo de Giro (dias)</label>
+                                <input name="tempoGiro" type="number" defaultValue={editando.tempoGiro}  />
+                            </div>
 
-                            <label>Foto do produto</label>
-                            <input name="foto" type="file" accept="image/*" style={{ width: "100%", marginBottom: "1rem" }} />
+                            <div className="form-group">
+                                <label>Foto do produto</label>
+                                <input name="foto" type="file" accept="image/*" style={{ width: "100%", marginBottom: "1rem" }} />
+                            </div>
 
-                            <div style={{ display: "flex", gap: "0.5rem" }}>
-                                <button type="submit">Salvar</button>
-                                <button type="button" onClick={() => setEditando(null)}>Cancelar</button>
+                            <div className="modal-actions">
+                                <button type="submit" className="btn-save">Salvar</button>
+                                <button type="button" className="btn-cancel" onClick={() => setEditando(null)}>Cancelar</button>
                             </div>
                         </form>
                     </div>

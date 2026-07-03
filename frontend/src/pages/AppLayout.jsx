@@ -24,7 +24,6 @@ export default function AppLayout({ children, usuario, showTabs = true }) {
           <span className='scnd-app-title'>Rabisco</span>
         </div>
         
-        {/* Só renderiza as tabs se showTabs for true */}
         {showTabs && (
           <nav className="nav-tabs">
             <button 
